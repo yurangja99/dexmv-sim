@@ -13,17 +13,17 @@ Run docker with x11 settings.
 ```bash
 xhost +
 docker run -dit \
-  --gpus '"device=0"' \ # all or '"device=N"'
-  --name dexmv \
-  --network=host \
-  --ipc=host \
-  -e DISPLAY=$DISPLAY \
-  -e USER=$USER \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
-  -v $HOME/.Xauthority:/root/.Xauthority:rw \
-  -w /workspace \
-  -v ~/.mujoco:~/.mujoco \
-  nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+--gpus '"device=0"' \
+--name dexmv \
+--network=host \
+--ipc=host \
+-e DISPLAY=$DISPLAY \
+-e USER=$USER \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+-v $HOME/.Xauthority:/root/.Xauthority:rw \
+-w /workspace \
+-v ~/.mujoco:~/.mujoco \
+nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 ```
 
 Initialize the container with the following scripts:
