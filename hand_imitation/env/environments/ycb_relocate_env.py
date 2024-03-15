@@ -64,6 +64,11 @@ class YCBRelocate(MujocoEnv):
         data = (data / 255).astype(np.float32)
         return data
 
+    def success(self):
+        obj_pos = self.data.body_xpos[self.obj_bid].ravel()
+        target_pos = self.data.body_xpos[self.target_object_bid].ravel()
+        return float(np.linalg.norm(obj_pos - target_pos) <= 0.1 * max(YCB_SIZE[self.object_name]))
+    
     def reward(self, action):
         obj_pos = self.data.body_xpos[self.obj_bid].ravel()
         palm_pos = self.data.site_xpos[self.S_grasp_sid].ravel()

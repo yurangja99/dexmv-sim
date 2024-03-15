@@ -38,20 +38,26 @@ def main(env_name, object_name):
     else:
         policy = f"../pretrained_model/{env_name}.pickle"
     pi = pickle.load(open(policy, 'rb'))
-    for _ in range(100):
+    total_success_rate = 0
+    num_eval_episodes = 3
+    for _ in range(num_eval_episodes):
         state, done = e.reset(), False
         step = 0
         reward_sum = 0
+        success_rate = 0
         while True:
             step += 1
             if step >= T:
+                success_rate = e.success()
                 break
             action = pi.get_action(state)[1]['evaluation']
             state, reward, done, _ = e.step(action)
             for _ in range(2):
                 e.render()
             reward_sum += reward
-        print(f'total reward {reward_sum}')
+        total_success_rate += success_rate
+        print(f'total reward {reward_sum}, success rate {success_rate}')
+    print(f"Total success rate: {total_success_rate / num_eval_episodes}")
 
 
 if __name__ == '__main__':

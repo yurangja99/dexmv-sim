@@ -1,5 +1,27 @@
 # DexMV: Imitation Learning for Dexterous Manipulation from Human Videos
 
+## Forked by yurangja99
+
+### Environment settings
+I separated `requirements.txt` from `environment.yaml` because of conda stucks when installing dependencies. 
+Also, I modified versions of some packages that's suitable for my environment. 
+I used docker and the process is described in [](./DOCKER.md)
+
+### Success or failure?
+To determine each episode succeed or failed, added `success()` function in `YCBRelocate`, `WaterPouringEnv`, and `MugPlaceObjectEnv` environments. 
+Success criterias were implemented according to those explained in the original paper. 
+
+- `YCBRelocate` (relocate task): distance between the object and target position is less than 0.1 unit length of the object. (doesn't care about orientation)
+- `WaterPouringEnv` (pour task): proportion of water particles poured inside the container
+- `MugPlaceObjectEnv` (put inside task): whether center mass of banana is inside the mug (impossible by technical issue: ~~volume percentage of the banana inside of the mug~~)
+
+`examples/visualize_policy.py` is implemented so that it can measure the success rate of the tasks. 
+
+### Util files
+- `util_plot_result.py`: you can set `RESULT_PATH` as a path to the `results.txt` file generated during the training. 
+
+<hr/>
+
 [[Project Page]](https://yzqin.github.io/dexmv/) [[Paper]](https://arxiv.org/abs/2108.05877) [[Demonstration Files]](https://drive.google.com/file/d/1v-SezFDQBcgekHZBlqulqa8rIgn0iwRT/view?usp=sharing)[[Raw Data(subset)]](https://drive.google.com/file/d/1k9dqlUyr_iL9bBp0WpK8fKK4DToWl_AC/view?usp=sharing)
 -----
 

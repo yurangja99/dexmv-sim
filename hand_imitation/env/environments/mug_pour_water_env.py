@@ -66,6 +66,9 @@ class WaterPouringEnv(MujocoEnv):
         obj_quat = self.data.body_xquat[self.obj_bid].ravel()
         return np.concatenate([qp[:30], palm_pos - obj_pos, palm_pos - target_pos, obj_pos - target_pos, obj_quat])
 
+    def success(self):
+        return np.sum(self.check_success_particles()) / self.num_particles
+
     def reward(self, action):
         obj_pos = self.data.body_xpos[self.obj_bid].ravel()
         palm_pos = self.data.site_xpos[self.S_grasp_sid].ravel()

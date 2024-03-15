@@ -61,6 +61,17 @@ class MugPlaceObjectEnv(MujocoEnv):
         mug_pos = self.data.body_xpos[self.mug_bid].ravel()
         return np.concatenate([qp[:30], palm_pos - obj_pos, palm_pos - mug_pos, obj_pos - mug_pos, obj_quat])
 
+    def success(self):
+        # return self.compute_intersection_rate()
+        # due to the problem with loading mesh, simplify success
+        # if center of mass of banana is inside mug, success.
+        obj_pos = self.data.body_xpos[self.obj_bid].ravel()
+        mug_top_pos = self.data.body_xpos[self.mug_bid].ravel() + [0, 0, YCB_SIZE["mug"][2] / 2 * self.mug_scale]
+        max_lift_height = mug_top_pos[2] + YCB_SIZE["banana"][1] * self.object_scale / 3
+        lift = max(min(obj_pos[2], max_lift_height) - YCB_SIZE[self.object_name][2] / 2.0, 0)
+
+        return float(lift < mug_top_pos[2])
+
     def reward(self, action):
         obj_pos = self.data.body_xpos[self.obj_bid].ravel()
         obj_quat = self.data.body_xquat[self.obj_bid].ravel()

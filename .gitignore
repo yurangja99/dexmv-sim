@@ -14,3 +14,7 @@ imgui.ini
 .DS_Store
 /.idea
 /log
+/demonstrations/
+/examples/training_log*/
+*.out
+*.egg-info
