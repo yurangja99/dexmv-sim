@@ -5,7 +5,7 @@
 ### Environment settings
 I separated `requirements.txt` from `environment.yaml` because of conda stucks when installing dependencies. 
 Also, I modified versions of some packages that's suitable for my environment. 
-I used docker and the process is described in [](./DOCKER.md)
+I used docker and the process is described in [`DOCKER.md`](./DOCKER.md).
 
 ### Success or failure?
 To determine each episode succeed or failed, added `success()` function in `YCBRelocate`, `WaterPouringEnv`, and `MugPlaceObjectEnv` environments. 
