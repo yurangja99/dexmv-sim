@@ -12,11 +12,7 @@ Run docker with x11 settings.
 
 ```bash
 xhost +
-docker run -dit \
---gpus '"device=0"' \
---name dexmv \
---network=host \
---ipc=host \
+docker run -dit --gpus '"device=0"' --name dexmv --network=host --ipc=host \
 -e DISPLAY=$DISPLAY \
 -e USER=$USER \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
