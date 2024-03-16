@@ -17,9 +17,6 @@ Success criterias were implemented according to those explained in the original 
 
 `examples/visualize_policy.py` is implemented so that it can measure the success rate of the tasks. 
 
-### Util files
-- `util_plot_result.py`: you can set `RESULT_PATH` as a path to the `results.txt` file generated during the training. 
-
 <hr/>
 
 [[Project Page]](https://yzqin.github.io/dexmv/) [[Paper]](https://arxiv.org/abs/2108.05877) [[Demonstration Files]](https://drive.google.com/file/d/1v-SezFDQBcgekHZBlqulqa8rIgn0iwRT/view?usp=sharing)[[Raw Data(subset)]](https://drive.google.com/file/d/1k9dqlUyr_iL9bBp0WpK8fKK4DToWl_AC/view?usp=sharing)
