@@ -18,7 +18,7 @@ docker run -dit --gpus '"device=0"' --name dexmv --network=host --ipc=host \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
 -v $HOME/.Xauthority:/root/.Xauthority:rw \
 -w /workspace \
--v ~/.mujoco:~/.mujoco \
+-v $HOME/.mujoco:/root/.mujoco \
 nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 ```
 
@@ -36,16 +36,20 @@ sudo apt install -y libgl1-mesa-glx libxrandr2 libxinerama1 libosmesa6-dev libgl
 echo "export LD_LIBRARY_PATH=$HOME/.mujoco/mujoco200/bin:${LD_LIBRARY_PATH}" >> ~/.bashrc 
 echo "export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so" >> ~/.bashrc 
 source ~/.bashrc 
+sleep 1
 # install conda
 curl --output anaconda.sh https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh 
 sha256sum anaconda.sh 
 bash anaconda.sh 
+rm anaconda.sh
 echo "export PATH=~/anaconda3/bin:~/anaconda3/condabin:$PATH" >> ~/.bashrc 
 source ~/.bashrc 
+sleep 1
 # init conda
 conda update -y -n base conda 
 conda init 
 source ~/.bashrc 
+sleep 1
 # clone dexmv-sim (forked) and dexmv-learn
 cd /workspace
 git clone https://github.com/yurangja99/dexmv-sim.git 
