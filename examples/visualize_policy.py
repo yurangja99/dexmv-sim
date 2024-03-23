@@ -37,6 +37,7 @@ def main(env_name, object_name):
         policy = f"../pretrained_model/{env_name}-{object_name}.pickle"
     else:
         policy = f"../pretrained_model/{env_name}.pickle"
+    #policy = "./training_log/dapg_relocate-mug-0.8_relocate-mug_0.1_100_trpo_seed200/iterations/policy_2000.pickle"
     pi = pickle.load(open(policy, 'rb'))
     total_success_rate = 0
     num_eval_episodes = 3
