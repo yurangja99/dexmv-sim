@@ -100,6 +100,7 @@ You may need to setup the MuJoCo related environment variables, e.g. `LD_LIBRARY
 ```bash
 cd DEXMV_PACKAGE_PATH/examples
 python visualize_policy.py --env_name=relocate --object_name=tomato_soup_can # for relocate task
+python visualize_policy.py --env_name=relocate --object_name=mug --policy_path=<PATH_TO_TRAINED_POLICY> --render --num_eval_episodes=1000
 ```
 
 You can also try different object_name: mug, sugar_box, large_clamp, mustard_bottle, potted_meat_can, foam_brick
