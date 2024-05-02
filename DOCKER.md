@@ -85,6 +85,7 @@ python visualize_policy.py --env_name=place_inside
 # train from scratch
 python train.py --cfg configs/dapg-mug-example.yaml
 python train.py --cfg configs/soil-clamp-example.yaml
+python train.py --cfg configs/dapg-tomato_soup_can-example.yaml
 
 # hand motion retargeting
 python retarget_human_hand.py --hand_dir=./retargeting_source/relocate_mustard_example_seq/hand_pose --output_file=example_retargeting.pkl

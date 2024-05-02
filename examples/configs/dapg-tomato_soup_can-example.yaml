@@ -1,0 +1,26 @@
+BC_INIT: false
+DAPG_LAM0: 0.1
+DAPG_LAM1: 0.99
+
+# number of demonstrations
+# mug: 87
+# large clamp: 96
+# mustard bottle: 99
+# sugar box: 101 (failed in the paper)
+# tomato soup can: 101
+
+DEMO_FILE: ../demonstrations/relocate-tomato_soup_can.pkl
+DEMO_RATIO: 50
+DEMO_SIGMA: 0.2
+ENV_NAME: relocate-tomato_soup_can-0.8
+JOB_DIR: ./training_log
+JOB_NAME: trpo
+NUM_ITER: 4000
+POLICY_INIT_LOG_STD: 0.0
+POLICY_WS:
+- 32
+- 32
+RNG_SEED: 200
+SAVE_FREQ: 100
+USE_DAPG: true
+NUM_CPU: 10

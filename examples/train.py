@@ -5,6 +5,7 @@
 import argparse
 import pickle
 import sys
+import numpy as np
 
 import gym.logger
 
@@ -94,6 +95,45 @@ def train():
             num_traj = int(min(cfg.DEMO_RATIO, num_traj))
             demo_paths = demo_paths[:num_traj]
             print(f'num traj: {num_traj}')
+
+    # Add random noise to demos
+    """
+    demo = [
+        {
+            'model_data': [
+                {
+                    'body_pos': np.array((29, 3)),
+                    'body_quat': np.array((29, 4)),
+                    'site_pos': np.array((28, 3)),
+                    'site_quat': np.array((28, 4))
+                }
+            ],
+            'observations': np.array((404, 39)),
+            'rewards': np.array((404,)),
+            'actions': np.array((404, 30)),
+            'sim_data': [
+                {
+                    'qpos': np.array((37,)),
+                    'qvel': np.array((36,)),
+                    'qacc': np.array((36,))
+                }
+            ]
+        },
+    ]
+    """
+    if cfg.DEMO_SIGMA is not None and cfg.DEMO_SIGMA > 0:
+        print(f"demo noise: {cfg.DEMO_SIGMA}")
+        for demo_idx in range(num_traj):
+            # observations: qpos (30 dim, scale 2.0) + relative_pos (scale 0.5)
+            observation_noise = np.concatenate([
+                np.random.normal(0.0, cfg.DEMO_SIGMA, (1, 30)), # qpos
+                np.random.normal(0.0, cfg.DEMO_SIGMA / 4.0, (1, spec.observation_dim - 30)) # relative pos
+            ], axis=1)
+            # actions: actuators (30 dim, scale 2.0)
+            action_noise = np.random.normal(0.0, cfg.DEMO_SIGMA, (1, spec.action_dim)) # action space
+            # add noises
+            demo_paths[demo_idx]["observations"] += observation_noise
+            demo_paths[demo_idx]["actions"] += action_noise
 
     # Initialize w/ behavior cloning
     if cfg.BC_INIT:
