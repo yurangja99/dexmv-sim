@@ -15,7 +15,7 @@ DEMO_SIGMA: 0.2
 ENV_NAME: relocate-tomato_soup_can-0.8
 JOB_DIR: ./training_log
 JOB_NAME: trpo
-NUM_ITER: 4000
+NUM_ITER: 3000
 POLICY_INIT_LOG_STD: 0.0
 POLICY_WS:
 - 32

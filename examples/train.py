@@ -124,12 +124,9 @@ def train():
     if cfg.DEMO_SIGMA is not None and cfg.DEMO_SIGMA > 0:
         print(f"demo noise: {cfg.DEMO_SIGMA}")
         for demo_idx in range(num_traj):
-            # observations: qpos (30 dim, scale 2.0) + relative_pos (scale 0.5)
-            observation_noise = np.concatenate([
-                np.random.normal(0.0, cfg.DEMO_SIGMA, (1, 30)), # qpos
-                np.random.normal(0.0, cfg.DEMO_SIGMA / 4.0, (1, spec.observation_dim - 30)) # relative pos
-            ], axis=1)
-            # actions: actuators (30 dim, scale 2.0)
+            # observations: qpos (30 dim) + relative_pos (9 dim) of std 0.1
+            observation_noise = np.random.normal(0.0, cfg.DEMO_SIGMA, (1, spec.observation_dim)) # observation space
+            # actions: actuators (30 dim) of std 0.158
             action_noise = np.random.normal(0.0, cfg.DEMO_SIGMA, (1, spec.action_dim)) # action space
             # add noises
             demo_paths[demo_idx]["observations"] += observation_noise
